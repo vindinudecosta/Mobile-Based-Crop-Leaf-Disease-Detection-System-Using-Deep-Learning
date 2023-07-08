@@ -1,8 +1,8 @@
-#Sat May 20 06:42:06 IST 2023
-base.0=C\:\\Users\\user\\Desktop\\rice_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Users\\user\\Desktop\\rice_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
-base.2=C\:\\Users\\user\\Desktop\\rice_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.3=C\:\\Users\\user\\Desktop\\rice_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+#Sat Jul 08 12:53:46 IST 2023
+base.0=E\:\\Project assets\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=E\:\\Project assets\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+base.2=E\:\\Project assets\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.3=E\:\\Project assets\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=0/classes.dex
