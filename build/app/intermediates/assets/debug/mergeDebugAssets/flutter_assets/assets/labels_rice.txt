@@ -1,0 +1,8 @@
+0 Bacterialblight
+1 Brownspot
+2 Healthy
+3 Leaf Blast
+4 Leaf Scald
+5 Narrow brown
+6 Tungro
+
