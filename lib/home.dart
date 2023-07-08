@@ -83,7 +83,7 @@ class Dashboard extends StatelessWidget {
                     const SizedBox(height: 50.0),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 0),
-                      height:200,
+                      height: 200,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: <Widget>[
@@ -98,21 +98,20 @@ class Dashboard extends StatelessWidget {
                               );
                             },
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
                                   decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.green,
-                                  width: 3.0,
-                                ),
-                            
-                              ),
-                              child: const Image(
-                                image: NetworkImage(
-                                  'https://media.istockphoto.com/id/1153044117/vector/potato-plant-vector-isolated-illustration.jpg?s=612x612&w=0&k=20&c=UY8HP3EvyjrQfoKvg4miFgPDXyUEheP9P8TOw8Au6-Y=',
-                                ),
-                              ),
-                            )),
+                                    border: Border.all(
+                                      color: Colors.green,
+                                      width: 3.0,
+                                    ),
+                                  ),
+                                  child: const Image(
+                                    image: NetworkImage(
+                                      'https://media.istockphoto.com/id/1153044117/vector/potato-plant-vector-isolated-illustration.jpg?s=612x612&w=0&k=20&c=UY8HP3EvyjrQfoKvg4miFgPDXyUEheP9P8TOw8Au6-Y=',
+                                    ),
+                                  ),
+                                )),
                           ),
                           InkWell(
                             onTap: () {
@@ -124,23 +123,22 @@ class Dashboard extends StatelessWidget {
                                 ),
                               );
                             },
-                            child:  Padding(
+                            child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                                  decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black,
-                                  width: 3.0,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black,
+                                    width: 3.0,
+                                  ),
                                 ),
-                               
-                              ),
-                              child: const Image(
-                                image: NetworkImage(
-                                  'https://us.123rf.com/450wm/mything/mything2003/mything200300001/141890155-rice-spikes-stem-with-leaves-vector-illustration-cartoon-flat-icon-isolated-on-white.jpg?ver=6',
+                                child: const Image(
+                                  image: NetworkImage(
+                                    'https://us.123rf.com/450wm/mything/mything2003/mything200300001/141890155-rice-spikes-stem-with-leaves-vector-illustration-cartoon-flat-icon-isolated-on-white.jpg?ver=6',
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
-                                fit: BoxFit.cover,
                               ),
-                            ),
                             ),
                           ),
                           InkWell(
