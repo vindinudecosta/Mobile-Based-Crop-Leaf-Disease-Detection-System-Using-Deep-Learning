@@ -1,5 +1,3 @@
-
-
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
@@ -147,7 +145,7 @@ class Classifier {
     final resizeOp = ResizeOp(shapeLength, shapeLength, ResizeMethod.BILINEAR);
 
     // #4
-    final normalizeOp = NormalizeOp(127.5, 127.5);
+    final normalizeOp = NormalizeOp(0, 255);
 
     // #5
     final imageProcessor = ImageProcessorBuilder()

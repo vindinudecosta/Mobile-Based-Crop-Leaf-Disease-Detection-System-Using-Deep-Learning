@@ -9,12 +9,13 @@ import 'plant_photo_view.dart';
 
 const _labelsFileName = 'assets/labels_potato.txt';
 const _modelFileName = 'model_unquant_potato.tflite';
+//const _modelFileName = 'tflite_model_potato_v1.tflite';
 
 class PlantRecogniserPotato extends StatefulWidget {
-  const PlantRecogniserPotato ({super.key});
+  const PlantRecogniserPotato({super.key});
 
   @override
-  State<PlantRecogniserPotato > createState() => _PlantRecogniserState();
+  State<PlantRecogniserPotato> createState() => _PlantRecogniserState();
 }
 
 enum _ResultStatus {
@@ -23,7 +24,7 @@ enum _ResultStatus {
   found,
 }
 
-class _PlantRecogniserState extends State<PlantRecogniserPotato > {
+class _PlantRecogniserState extends State<PlantRecogniserPotato> {
   bool _isAnalyzing = false;
   final picker = ImagePicker();
   File? _selectedImageFile;
@@ -85,7 +86,7 @@ class _PlantRecogniserState extends State<PlantRecogniserPotato > {
             label: 'Profile',
           ),
         ],
-        onTap: (label) => {Navigator.pop<PlantRecogniserPotato >(context)},
+        onTap: (label) => {Navigator.pop<PlantRecogniserPotato>(context)},
       ),
 
       body: Container(
@@ -96,7 +97,6 @@ class _PlantRecogniserState extends State<PlantRecogniserPotato > {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-             
               const Text.rich(
                 TextSpan(
                   text: 'crop',
@@ -117,26 +117,24 @@ class _PlantRecogniserState extends State<PlantRecogniserPotato > {
               //   padding: const EdgeInsets.only(top: 30),
               //   child: _buildTitle(),
               // ),
-          
+
               _buildPhotolView(),
               const SizedBox(height: 20),
-              
-              _buildResultView(),
-             const SizedBox(height: 80),
 
-             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:[
-              _buildPickPhotoButtonfromcamera(
-                title: 'Take a photo',
-                source: ImageSource.camera,
-              ),
-              const SizedBox(width: 30), 
-              _buildPickPhotoButtonfromgallery(
-                title: 'Pick from gallery',
-                source: ImageSource.gallery,
-              )]),
-              
+              _buildResultView(),
+              const SizedBox(height: 80),
+
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                _buildPickPhotoButtonfromcamera(
+                  title: 'Take a photo',
+                  source: ImageSource.camera,
+                ),
+                const SizedBox(width: 30),
+                _buildPickPhotoButtonfromgallery(
+                  title: 'Pick from gallery',
+                  source: ImageSource.gallery,
+                )
+              ]),
             ],
           ),
         ),
@@ -175,16 +173,20 @@ class _PlantRecogniserState extends State<PlantRecogniserPotato > {
   }) {
     return IconButton(
       onPressed: () => _onPickPhoto(source),
-      icon: const Icon(Icons.photo_library,size: 50),
+      icon: const Icon(Icons.photo_library, size: 50),
     );
   }
-    Widget _buildPickPhotoButtonfromcamera({
+
+  Widget _buildPickPhotoButtonfromcamera({
     required ImageSource source,
     required String title,
   }) {
     return IconButton(
       onPressed: () => _onPickPhoto(source),
-      icon: const Icon(Icons.camera_alt, size: 50,),
+      icon: const Icon(
+        Icons.camera_alt,
+        size: 50,
+      ),
     );
   }
 

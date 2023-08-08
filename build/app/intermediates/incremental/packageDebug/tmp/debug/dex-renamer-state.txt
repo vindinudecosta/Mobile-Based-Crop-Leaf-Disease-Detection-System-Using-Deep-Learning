@@ -1,8 +1,8 @@
-#Sat Jul 08 12:53:46 IST 2023
-base.0=E\:\\Project assets\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=E\:\\Project assets\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
-base.2=E\:\\Project assets\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.3=E\:\\Project assets\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+#Mon Aug 07 22:36:57 IST 2023
+base.0=D\:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.1=D\:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+base.2=D\:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.3=D\:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=0/classes.dex

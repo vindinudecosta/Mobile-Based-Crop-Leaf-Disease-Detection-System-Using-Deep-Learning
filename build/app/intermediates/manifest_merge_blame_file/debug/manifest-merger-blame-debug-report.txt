@@ -13,14 +13,14 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->E:\Project assets\crop_disease_classification\android\app\src\debug\AndroidManifest.xml:7:5-66
-15-->E:\Project assets\crop_disease_classification\android\app\src\debug\AndroidManifest.xml:7:22-64
+15-->D:\Projects\Final_year project\crop_disease_classification\android\app\src\debug\AndroidManifest.xml:7:5-66
+15-->D:\Projects\Final_year project\crop_disease_classification\android\app\src\debug\AndroidManifest.xml:7:22-64
 16    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-16-->[:tflite_flutter_helper] E:\Project assets\crop_disease_classification\build\tflite_flutter_helper\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-71
-16-->[:tflite_flutter_helper] E:\Project assets\crop_disease_classification\build\tflite_flutter_helper\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-68
+16-->[:tflite_flutter_helper] D:\Projects\Final_year project\crop_disease_classification\build\tflite_flutter_helper\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-71
+16-->[:tflite_flutter_helper] D:\Projects\Final_year project\crop_disease_classification\build\tflite_flutter_helper\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-68
 17    <uses-permission android:name="android.permission.CAMERA" />
-17-->[:camera] E:\Project assets\crop_disease_classification\build\camera\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-65
-17-->[:camera] E:\Project assets\crop_disease_classification\build\camera\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-62
+17-->[:camera] D:\Projects\Final_year project\crop_disease_classification\build\camera\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-65
+17-->[:camera] D:\Projects\Final_year project\crop_disease_classification\build\camera\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-62
 18
 19    <permission
 19-->[androidx.core:core:1.10.1] C:\Users\vindi\.gradle\caches\transforms-3\12d099ea686a1c4551cfcd3b667543a1\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
@@ -74,21 +74,21 @@
 62            android:value="2" />
 63
 64        <provider
-64-->[:image_picker_android] E:\Project assets\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
+64-->[:image_picker_android] D:\Projects\Final_year project\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
 65            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-65-->[:image_picker_android] E:\Project assets\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
+65-->[:image_picker_android] D:\Projects\Final_year project\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
 66            android:authorities="com.kodeco.plantreco.flutter.image_provider"
-66-->[:image_picker_android] E:\Project assets\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
+66-->[:image_picker_android] D:\Projects\Final_year project\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
 67            android:exported="false"
-67-->[:image_picker_android] E:\Project assets\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+67-->[:image_picker_android] D:\Projects\Final_year project\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
 68            android:grantUriPermissions="true" >
-68-->[:image_picker_android] E:\Project assets\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
+68-->[:image_picker_android] D:\Projects\Final_year project\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
 69            <meta-data
-69-->[:image_picker_android] E:\Project assets\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+69-->[:image_picker_android] D:\Projects\Final_year project\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
 70                android:name="android.support.FILE_PROVIDER_PATHS"
-70-->[:image_picker_android] E:\Project assets\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+70-->[:image_picker_android] D:\Projects\Final_year project\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
 71                android:resource="@xml/flutter_image_picker_file_paths" />
-71-->[:image_picker_android] E:\Project assets\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+71-->[:image_picker_android] D:\Projects\Final_year project\crop_disease_classification\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
 72        </provider>
 73
 74        <uses-library

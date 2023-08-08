@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\Project assets\\crop_disease_classification\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ms\\values-ms.xml",
+            "outputFile": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ms\\values-ms.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vindi\\.gradle\\caches\\transforms-3\\12d099ea686a1c4551cfcd3b667543a1\\transformed\\core-1.10.1\\res\\values-ms\\values-ms.xml",

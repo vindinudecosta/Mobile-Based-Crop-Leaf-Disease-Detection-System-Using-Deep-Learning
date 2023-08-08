@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\Project assets\\crop_disease_classification\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "E:\\Project assets\\crop_disease_classification\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

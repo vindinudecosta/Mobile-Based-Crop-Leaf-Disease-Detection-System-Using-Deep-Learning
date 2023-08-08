@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\Project assets\\crop_disease_classification\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vindi\\.gradle\\caches\\transforms-3\\ccbc5c88289a77b26d25d593a13ee0d7\\transformed\\jetified-savedstate-1.2.1\\res\\values\\values.xml",
@@ -59,24 +59,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\vindi\\.gradle\\caches\\transforms-3\\9209cf4ce9ca1873e66a5d7079401ecd\\transformed\\lifecycle-viewmodel-2.6.1\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "49",
-                        "endOffsets": "100"
-                    },
-                    "to": {
-                        "startLines": "97",
-                        "startColumns": "4",
-                        "startOffsets": "5651",
-                        "endColumns": "49",
-                        "endOffsets": "5696"
-                    }
-                },
-                {
-                    "source": "E:\\Project assets\\crop_disease_classification\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -92,6 +75,23 @@
                         "endLines": "112,115",
                         "endColumns": "12,12",
                         "endOffsets": "6728,6897"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\vindi\\.gradle\\caches\\transforms-3\\9209cf4ce9ca1873e66a5d7079401ecd\\transformed\\lifecycle-viewmodel-2.6.1\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "49",
+                        "endOffsets": "100"
+                    },
+                    "to": {
+                        "startLines": "97",
+                        "startColumns": "4",
+                        "startOffsets": "5651",
+                        "endColumns": "49",
+                        "endOffsets": "5696"
                     }
                 },
                 {
