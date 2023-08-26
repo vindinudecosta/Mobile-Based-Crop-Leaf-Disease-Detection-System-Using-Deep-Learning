@@ -7,8 +7,11 @@ import '../classifier/classifier.dart';
 import '../styles.dart';
 import 'plant_photo_view.dart';
 
-const _labelsFileName = 'assets/labels_rice.txt';
-const _modelFileName = 'model_unquant.tflite';
+const _labelsFileNameMain = 'assets/labels_rice.txt';
+const _modelFileNameMain = 'model_unquant.tflite';
+
+const _labelsFileName = 'assets/labels_leaves.txt';
+const _modelFileName = 'tflite_model_leaves_v1.tflite';
 
 class PlantRecogniserRice extends StatefulWidget {
   const PlantRecogniserRice({super.key});
@@ -34,11 +37,12 @@ class _PlantRecogniserState extends State<PlantRecogniserRice> {
   double _accuracy = 0.0;
 
   late Classifier _classifier;
-
+  late Classifier _classifierMain;
   @override
   void initState() {
     super.initState();
     _loadClassifier();
+    _loadClassifierMain();
   }
 
   Future<void> _loadClassifier() async {
@@ -53,6 +57,20 @@ class _PlantRecogniserState extends State<PlantRecogniserRice> {
       modelFileName: _modelFileName,
     );
     _classifier = classifier!;
+  }
+
+  Future<void> _loadClassifierMain() async {
+    debugPrint(
+      'Start loading of Classifier with '
+      'labels at $_labelsFileNameMain, '
+      'model at $_modelFileNameMain',
+    );
+
+    final classifierMain = await Classifier.loadWith(
+      labelsFileName: _labelsFileNameMain,
+      modelFileName: _modelFileNameMain,
+    );
+    _classifierMain = classifierMain!;
   }
 
   @override
@@ -96,7 +114,6 @@ class _PlantRecogniserState extends State<PlantRecogniserRice> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-             
               const Text.rich(
                 TextSpan(
                   text: 'crop',
@@ -117,26 +134,24 @@ class _PlantRecogniserState extends State<PlantRecogniserRice> {
               //   padding: const EdgeInsets.only(top: 30),
               //   child: _buildTitle(),
               // ),
-          
+
               _buildPhotolView(),
               const SizedBox(height: 20),
-              
-              _buildResultView(),
-             const SizedBox(height: 80),
 
-             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:[
-              _buildPickPhotoButtonfromcamera(
-                title: 'Take a photo',
-                source: ImageSource.camera,
-              ),
-              const SizedBox(width: 30), 
-              _buildPickPhotoButtonfromgallery(
-                title: 'Pick from gallery',
-                source: ImageSource.gallery,
-              )]),
-              
+              _buildResultView(),
+              const SizedBox(height: 80),
+
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                _buildPickPhotoButtonfromcamera(
+                  title: 'Take a photo',
+                  source: ImageSource.camera,
+                ),
+                const SizedBox(width: 30),
+                _buildPickPhotoButtonfromgallery(
+                  title: 'Pick from gallery',
+                  source: ImageSource.gallery,
+                )
+              ]),
             ],
           ),
         ),
@@ -175,16 +190,20 @@ class _PlantRecogniserState extends State<PlantRecogniserRice> {
   }) {
     return IconButton(
       onPressed: () => _onPickPhoto(source),
-      icon: const Icon(Icons.photo_library,size: 50),
+      icon: const Icon(Icons.photo_library, size: 50),
     );
   }
-    Widget _buildPickPhotoButtonfromcamera({
+
+  Widget _buildPickPhotoButtonfromcamera({
     required ImageSource source,
     required String title,
   }) {
     return IconButton(
       onPressed: () => _onPickPhoto(source),
-      icon: const Icon(Icons.camera_alt, size: 50,),
+      icon: const Icon(
+        Icons.camera_alt,
+        size: 50,
+      ),
     );
   }
 
@@ -214,21 +233,35 @@ class _PlantRecogniserState extends State<PlantRecogniserRice> {
 
     final imageInput = img.decodeImage(image.readAsBytesSync())!;
 
-    final resultCategory = _classifier.predict(imageInput);
+    var resultCategory = _classifier.predict(imageInput);
 
-    final result = resultCategory.score >= 0
+    var result = resultCategory.score >= 0
         ? _ResultStatus.found
         : _ResultStatus.notFound;
-    final plantLabel = resultCategory.label;
-    final accuracy = resultCategory.score;
+    var plantLabel = resultCategory.label;
+    var accuracy = resultCategory.score;
 
     _setAnalyzing(false);
+    if (plantLabel == 'Leaves') {
+      resultCategory = _classifierMain.predict(imageInput);
+      result = resultCategory.score >= 0
+          ? _ResultStatus.found
+          : _ResultStatus.notFound;
+      plantLabel = resultCategory.label;
+      accuracy = resultCategory.score;
 
-    setState(() {
-      _resultStatus = result;
-      _plantLabel = plantLabel;
-      _accuracy = accuracy;
-    });
+      setState(() {
+        _resultStatus = result;
+        _plantLabel = plantLabel;
+        _accuracy = accuracy;
+      });
+    } else {
+      setState(() {
+        _resultStatus = result;
+        _plantLabel = plantLabel;
+        _accuracy = accuracy;
+      });
+    }
   }
 
   Widget _buildResultView() {
