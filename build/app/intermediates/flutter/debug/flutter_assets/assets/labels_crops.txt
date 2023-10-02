@@ -1,8 +1,0 @@
-0 Potato leaves
-1 Rice leaves
-2 Tea leaves
-3 Tomato leaves
-4 non leaves
-5 pepper leaves
-6 unknown_Leaves
-

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 const kMainFont = 'Roboto';
@@ -31,7 +30,8 @@ const kTitleTextStyle = TextStyle(
 
 const kAnalyzingTextStyle = TextStyle(
     fontFamily: kMainFont,
-    fontSize: 25.0,
+    fontSize: 20.0,
+    fontWeight: FontWeight.w700,
     color: kColorEggshell,
     decoration: TextDecoration.none);
 

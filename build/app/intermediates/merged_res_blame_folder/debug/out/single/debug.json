@@ -32,12 +32,12 @@
         "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_background.png.flat",
-        "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_background.png"
-    },
-    {
         "merged": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_background.png.flat",
         "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_background.png.flat",
+        "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_background.png"
     },
     {
         "merged": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
@@ -60,20 +60,20 @@
         "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_background.png"
     },
     {
-        "merged": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_foreground.png.flat",
-        "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_foreground.png"
-    },
-    {
         "merged": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_foreground.png.flat",
-        "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_foreground.png"
+        "merged": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_foreground.png"
     },
     {
         "merged": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "D:\\Projects\\Final_year project\\crop_disease_classification\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_foreground.png"
     },
     {
         "merged": "D:\\Projects\\Final_year project\\crop_disease_classification\\build\\app\\intermediates\\merged_res\\debug\\mipmap_razewarelogo_128.png.flat",

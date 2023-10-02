@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "313745756233",
+    "project_id": "cropleafdiseaseapp",
+    "storage_bucket": "cropleafdiseaseapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313745756233:android:4210312eda63fb58c36f98",
+        "android_client_info": {
+          "package_name": "com.kodeco.plantreco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313745756233-k19qc3tsglpp4hkvbtb79d3qn3c8cmes.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyPemYUtHxFLRDWgDPJusJ5XSEgiIJwaI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313745756233-k19qc3tsglpp4hkvbtb79d3qn3c8cmes.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

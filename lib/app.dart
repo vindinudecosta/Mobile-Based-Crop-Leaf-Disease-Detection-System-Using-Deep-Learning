@@ -1,9 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'home.dart' show Dashboard;
+import 'root_page.dart' show RootPage;
 
 class MainApp extends StatelessWidget {
   const MainApp({Key? key}) : super(key: key);
@@ -19,7 +17,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Plant Recognizer',
       theme: ThemeData.light(),
-      home: const Dashboard(),
+      home: const RootPage(),
       debugShowCheckedModeBanner: false,
     );
   }
