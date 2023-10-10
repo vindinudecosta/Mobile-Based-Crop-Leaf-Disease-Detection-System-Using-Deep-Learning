@@ -1,5 +1,11 @@
+import 'dart:io';
+
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as Path;
 
 class InsertData extends StatefulWidget {
   const InsertData({Key? key}) : super(key: key);
@@ -9,99 +15,196 @@ class InsertData extends StatefulWidget {
 }
 
 class _InsertDataState extends State<InsertData> {
-  final userNameController = TextEditingController();
-  final userAgeController = TextEditingController();
-  final userSalaryController = TextEditingController();
-
+  final cropNameController = TextEditingController();
+  final cropDiseaseNameController = TextEditingController();
+  final cropDiseaseSymptomsController = TextEditingController();
+  final cropDiseasePrecautionsController = TextEditingController();
   late DatabaseReference dbRef;
+  final List<File> _image = [];
+  bool _isLoading = false;
+
+  List<String> urlsList = [];
+  double val = 0;
+  dynamic chooseImage() async {
+    XFile? pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image.add(File(pickedFile!.path));
+    });
+  }
+
+  Future uploadFile() async {
+    int i = 1;
+
+    for (var img in _image) {
+      setState(() {
+        val = i / _image.length;
+      });
+
+      var ref = FirebaseStorage.instance.ref().child(
+          '${cropNameController.text}_${cropDiseaseNameController.text}/${Path.basename(img.path)}');
+
+      await ref.putFile(img).whenComplete(() async {
+        await ref.getDownloadURL().then((value) {
+          urlsList.add(value);
+          i++;
+        });
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    dbRef = FirebaseDatabase.instance.ref().child('Students');
+    dbRef = FirebaseDatabase.instance.ref().child('NewCropDisease');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Inserting data'),
+        backgroundColor: Color.fromARGB(255, 101, 158, 119),
+        title: const Text('Insert new cropdiseases'),
       ),
-      body: Center(
+      body: SingleChildScrollView(
+          child: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 50,
-              ),
-              const Text(
-                'Inserting data in Firebase Realtime Database',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              TextField(
-                controller: userNameController,
-                keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Name',
-                  hintText: 'Enter Your Name',
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              TextField(
-                controller: userAgeController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Age',
-                  hintText: 'Enter Your Age',
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              TextField(
-                controller: userSalaryController,
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Salary',
-                  hintText: 'Enter Your Salary',
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              MaterialButton(
-                onPressed: () {
-                  final students = <String, String>{
-                    'name': userNameController.text,
-                    'age': userAgeController.text,
-                    'salary': userSalaryController.text
-                  };
+          child: _isLoading
+              ? const CircularProgressIndicator()
+              : Column(
+                  children: [
+                    // const SizedBox(
+                    //   height: 50,
+                    // ),
+                    // const Text(
+                    //   'Inserting New Crop Diseases to the database',
+                    //   style: TextStyle(
+                    //     fontSize: 24,
+                    //     fontWeight: FontWeight.w500,
+                    //   ),
+                    //   textAlign: TextAlign.center,
+                    // ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    TextField(
+                      controller: cropNameController,
+                      keyboardType: TextInputType.text,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Crop Name',
+                        hintText: 'Enter the Crop Name',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    TextField(
+                      controller: cropDiseaseNameController,
+                      keyboardType: TextInputType.text,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Disease Name',
+                        hintText: 'Enter the disease name',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    TextFormField(
+                      controller: cropDiseaseSymptomsController,
+                      maxLines: 5,
+                      keyboardType: TextInputType.multiline,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Add Disease Symptoms',
+                        hintText: 'Enter the disease symptoms',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    TextFormField(
+                      controller: cropDiseasePrecautionsController,
+                      maxLines: 5,
+                      keyboardType: TextInputType.multiline,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Add Disease precautions',
+                        hintText: 'Enter the disease precautions',
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Stack(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(4),
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            itemCount: _image.length + 1,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3),
+                            itemBuilder: (context, index) {
+                              return index == 0
+                                  ? Center(
+                                      child: IconButton(
+                                        icon: const Icon(Icons.add),
+                                        onPressed: () {
+                                          chooseImage();
+                                        },
+                                      ),
+                                    )
+                                  : Container(
+                                      margin: const EdgeInsets.all(3),
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image:
+                                                  FileImage(_image[index - 1]),
+                                              fit: BoxFit.cover)),
+                                    );
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    MaterialButton(
+                      onPressed: () async {
+                        setState(() {
+                          _isLoading = true;
+                        });
 
-                  dbRef.push().set(students);
-                },
-                color: Colors.blue,
-                textColor: Colors.white,
-                minWidth: 300,
-                height: 40,
-                child: const Text('Insert Data'),
-              ),
-            ],
-          ),
+                        final students = <String, String>{
+                          'crop name': cropNameController.text,
+                          'disease name': cropDiseaseNameController.text,
+                          'symptoms': cropDiseaseSymptomsController.text,
+                          'precautions': cropDiseasePrecautionsController.text
+                        };
+
+                        await uploadFile()
+                            .whenComplete(() => Navigator.pop(context));
+                        setState(() {
+                          _isLoading = false;
+                        });
+
+                        dbRef.push().set(students);
+                      },
+                      color: Color.fromARGB(255, 101, 158, 119),
+                      textColor: Colors.white,
+                      minWidth: 300,
+                      height: 40,
+                      child: const Text('Upload'),
+                    ),
+                  ],
+                ),
         ),
-      ),
+      )),
     );
   }
 }

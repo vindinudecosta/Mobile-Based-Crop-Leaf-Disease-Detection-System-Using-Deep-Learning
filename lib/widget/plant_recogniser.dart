@@ -68,7 +68,12 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
 
   List<String> diseaseNames = [];
   List<String> diseaseSymptoms = [];
+  List<String> diseasePrecautions = [];
   String _diseaseSymptomsmain = '';
+
+  String _diseasePrecautionsmain = '';
+  String _nonLeafMsg = '';
+
   @override
   void initState() {
     super.initState();
@@ -95,7 +100,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   Future getData() async {
     List<String> cropdiseaseName = [];
     List<String> cropdiseaseSymptom = [];
-
+    List<String> cropdiseasePrecautions = [];
     final querySnapshot = await FirebaseFirestore.instance
         .collection('Crop')
         .doc(plantIDs[widget.plantID])
@@ -111,16 +116,21 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     for (final doc in querySnapshot.docs) {
       final diseaseName = doc.get('DiseaseName') as String;
       final diseaseSymptom = doc.get('DiseaseSymptoms') as String;
+      final diseasePrecaution = doc.get('DiseasePrecautions') as String;
 
       cropdiseaseName.add(diseaseName);
       cropdiseaseSymptom.add(diseaseSymptom);
+      cropdiseasePrecautions.add(diseasePrecaution);
 
       debugPrint('diseaseName retrieved successfully: $cropdiseaseName');
       debugPrint('diseaseSymptoms retrieved successfully: $cropdiseaseSymptom');
+      debugPrint(
+          'diseasePrecautions retrieved successfully:$cropdiseasePrecautions');
     }
     setState(() {
       diseaseNames = cropdiseaseName;
       diseaseSymptoms = cropdiseaseSymptom;
+      diseasePrecautions = cropdiseasePrecautions;
     });
 
     if (diseaseNames.isEmpty) {
@@ -133,6 +143,13 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
       debugPrint('disease symptoms array is empty');
     } else {
       debugPrint('disease symptoms array is not  empty = $diseaseSymptoms');
+    }
+
+    if (diseasePrecautions.isEmpty) {
+      debugPrint('disease precautions array is empty');
+    } else {
+      debugPrint(
+          'disease precautions array is not  empty = $diseasePrecautions');
     }
     // Now, diseaseNames and diseaseSymptoms arrays are populated with data
     // You can access these arrays as needed
@@ -234,38 +251,41 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
               left: 0,
               right: 0,
               child: Container(
-                padding: const EdgeInsets.only(top: 80, left: 30, right: 30),
-                height: size.height * .55,
-                width: size.width,
-                decoration: BoxDecoration(
-                  color:
-                      const Color.fromARGB(236, 211, 211, 211).withOpacity(.6),
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(30),
-                    topLeft: Radius.circular(30),
+                  padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
+                  height: size.height * .55,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(236, 211, 211, 211)
+                        .withOpacity(.6),
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(30),
+                      topLeft: Radius.circular(30),
+                    ),
                   ),
-                ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _buildPickPhotoButtonfromcamera(
-                              title: 'Take a photo',
-                              source: ImageSource.camera,
-                            ),
-                            const SizedBox(width: 30),
-                            _buildPickPhotoButtonfromgallery(
-                              title: 'Pick from gallery',
-                              source: ImageSource.gallery,
-                            )
-                          ]),
-                      _buildPhotolView(),
-                      const SizedBox(height: 20),
-                      _buildResultView(),
-                    ]),
-              ))
+                  child: SingleChildScrollView(
+                      child: Container(
+                    padding: const EdgeInsets.only(top: 0, left: 30, right: 30),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _buildPickPhotoButtonfromcamera(
+                                  title: 'Take a photo',
+                                  source: ImageSource.camera,
+                                ),
+                                const SizedBox(width: 30),
+                                _buildPickPhotoButtonfromgallery(
+                                  title: 'Pick from gallery',
+                                  source: ImageSource.gallery,
+                                )
+                              ]),
+                          _buildPhotolView(),
+                          const SizedBox(height: 20),
+                          _buildResultView(),
+                        ]),
+                  ))))
 
           // Padding(
           //   padding: const EdgeInsets.only(top: 30),
@@ -357,6 +377,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
 
     final imageInput = img.decodeImage(image.readAsBytesSync())!;
     var diseaseSymptomsmain = '';
+    var diseasePrecationsmain = '';
     var resultCategory = _classifier.predict(imageInput);
 
     var result = resultCategory.score >= 0
@@ -389,6 +410,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
         for (var i = 0; i < diseaseNames.length; i++) {
           if (plantLabel == diseaseNames[i]) {
             diseaseSymptomsmain = diseaseSymptoms[i];
+            diseasePrecationsmain = diseasePrecautions[i];
 
             break;
           } else {
@@ -407,12 +429,17 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
         _accuracy = accuracy;
 
         _diseaseSymptomsmain = diseaseSymptomsmain;
+        _diseasePrecautionsmain = diseasePrecationsmain;
       });
     } else {
+      const messageNonLeaves = 'Please add a crop to heal !';
       setState(() {
         _resultStatus = result;
         _plantLabel = plantLabel;
         _accuracy = accuracy;
+        _diseaseSymptomsmain = '';
+        _diseasePrecautionsmain = '';
+        _nonLeafMsg = messageNonLeaves;
       });
     }
   }
@@ -435,12 +462,24 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     }
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const SizedBox(height: 20),
         Text(title, style: kResultTextStyle),
-        const SizedBox(height: 10),
+        const SizedBox(height: 40),
         Text(accuracyLabel, style: kResultRatingTextStyle),
-        const SizedBox(height: 10),
-        Text(_diseaseSymptomsmain, style: kResultRatingTextStyle)
+        const SizedBox(height: 30),
+        if (_diseasePrecautionsmain == '' && _diseaseSymptomsmain == '')
+          Text(_nonLeafMsg, style: kResultRatingTextStyle)
+        else
+          Column(
+            children: [
+              Text(_diseaseSymptomsmain, style: kResultRatingTextStyle),
+              const SizedBox(height: 30),
+              Text(_diseasePrecautionsmain, style: kResultRatingTextStyle),
+              const SizedBox(height: 30),
+            ],
+          )
       ],
     );
   }
