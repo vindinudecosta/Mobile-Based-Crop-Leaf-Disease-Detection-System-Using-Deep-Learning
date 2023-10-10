@@ -42,7 +42,7 @@ class _InsertDataState extends State<InsertData> {
       });
 
       var ref = FirebaseStorage.instance.ref().child(
-          '${cropNameController.text}_${cropDiseaseNameController.text}/${Path.basename(img.path)}');
+          'newCropDiseases/ ${cropNameController.text}_${cropDiseaseNameController.text}/${Path.basename(img.path)}');
 
       await ref.putFile(img).whenComplete(() async {
         await ref.getDownloadURL().then((value) {
@@ -71,7 +71,10 @@ class _InsertDataState extends State<InsertData> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: _isLoading
-              ? const CircularProgressIndicator()
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                  // Center the loading indicator
+                )
               : Column(
                   children: [
                     // const SizedBox(
