@@ -11,6 +11,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:page_transition/page_transition.dart';
 // import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 // import '/insert_leafdata.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path/path.dart' as Path;
+import './disease_notification.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 const _labelsFileName = 'assets/labels_leaves.txt';
 const _modelFileName = 'tflite_model_leaves_v1.tflite';
@@ -42,8 +47,10 @@ enum _ResultStatus {
 }
 
 class _PlantRecogniserState extends State<PlantRecogniser> {
-  int _bottomNavIndex = 0;
+  late DatabaseReference dbReference;
 
+  int _bottomNavIndex = 0;
+  bool _isLoading = false;
   List<IconData> iconList = [
     Icons.home,
     Icons.favorite,
@@ -59,11 +66,10 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   _ResultStatus _resultStatus = _ResultStatus.notStarted;
   String _plantLabel = ''; // Name of Error Message
   double _accuracy = 0.0;
-
+  String? mtoken = '';
   late Classifier _classifier;
   late Classifier _classifierMain;
   List<String> plantIDs = [];
-
   List<String> plantDiseaseIDs = [];
 
   List<String> diseaseNames = [];
@@ -81,6 +87,62 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     _loadClassifierMain();
 
     getPlantID();
+
+    dbReference =
+        FirebaseDatabase.instance.ref().child('AnalyzePredictedDiseases');
+    requestPermission();
+    getToken();
+    initNotification();
+  }
+
+  void requestPermission() async {
+    final diseasNotificationMsg = FirebaseMessaging.instance;
+
+    final settings = await diseasNotificationMsg.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      debugPrint('User granted permission');
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      debugPrint('User granted provisional permission');
+    } else {
+      debugPrint('User declined or has not accepted permision');
+    }
+  }
+
+  void getToken() async {
+    await FirebaseMessaging.instance.getToken().then((token) {
+      setState(() {
+        mtoken = token;
+        debugPrint('device token is $mtoken');
+      });
+    });
+  }
+
+  Future<void> handleBackgroundMessage(RemoteMessage message) async {
+    debugPrint('Title: ${message.notification?.title}');
+    debugPrint('Body: ${message.notification?.body}');
+    debugPrint('Payload: ${message.data}');
+  }
+
+  Future<void> initNotification() async {
+    FirebaseMessaging.onMessage.listen(handleBackgroundMessage);
+  }
+
+  Future uploadFile(String diseasepredicted, File? diseaseImage) async {
+    if (diseaseImage != null) {
+      var ref = FirebaseStorage.instance.ref().child(
+          'PredictedImagestoAnalyze/${widget.plantName}_$diseasepredicted/$mtoken/${Path.basename(diseaseImage.path)}');
+      await ref.putFile(diseaseImage);
+    }
   }
 
   final CollectionReference plantList =
@@ -472,14 +534,51 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
         if (_diseasePrecautionsmain == '' && _diseaseSymptomsmain == '')
           Text(_nonLeafMsg, style: kResultRatingTextStyle)
         else
-          Column(
-            children: [
-              Text(_diseaseSymptomsmain, style: kResultRatingTextStyle),
-              const SizedBox(height: 30),
-              Text(_diseasePrecautionsmain, style: kResultRatingTextStyle),
-              const SizedBox(height: 30),
-            ],
-          )
+          _isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                  // Center the loading indicator
+                )
+              : Column(
+                  children: [
+                    Text(_diseaseSymptomsmain, style: kResultRatingTextStyle),
+                    const SizedBox(height: 30),
+                    Text(_diseasePrecautionsmain,
+                        style: kResultRatingTextStyle),
+                    const SizedBox(height: 30),
+                    MaterialButton(
+                      onPressed: () async {
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        final cropAnalyzeData = <String, dynamic>{
+                          'crop name': widget.plantName,
+                          'disease name predicted': _plantLabel,
+                          'device token': mtoken,
+                        };
+
+                        // await uploadFile()
+                        //     .whenComplete(() => Navigator.pop(context));
+                        // setState(() {
+                        //   _isLoading = false;
+                        // });
+
+                        dbReference.push().set(cropAnalyzeData);
+
+                        await uploadFile(_plantLabel, _selectedImageFile)
+                            .whenComplete(() => Navigator.pop(context));
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      },
+                      color: Color.fromARGB(255, 101, 158, 119),
+                      textColor: Colors.white,
+                      minWidth: 300,
+                      height: 40,
+                      child: const Text('Upload'),
+                    ),
+                  ],
+                )
       ],
     );
   }

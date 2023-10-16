@@ -69,7 +69,7 @@ class _InsertDataState extends State<InsertData> {
       body: SingleChildScrollView(
           child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(20.0),
           child: _isLoading
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -141,9 +141,23 @@ class _InsertDataState extends State<InsertData> {
                     const SizedBox(
                       height: 50,
                     ),
+                    const Text('Insert at least 1500 images of the disease',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        )),
+                    const SizedBox(
+                      height: 30,
+                    ),
                     Stack(
                       children: [
                         Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Color.fromARGB(255, 146, 146, 146),
+                            ),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
                           padding: const EdgeInsets.all(4),
                           child: GridView.builder(
                             shrinkWrap: true,
@@ -171,7 +185,7 @@ class _InsertDataState extends State<InsertData> {
                                     );
                             },
                           ),
-                        )
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -183,7 +197,7 @@ class _InsertDataState extends State<InsertData> {
                           _isLoading = true;
                         });
 
-                        final students = <String, String>{
+                        final cropData = <String, String>{
                           'crop name': cropNameController.text,
                           'disease name': cropDiseaseNameController.text,
                           'symptoms': cropDiseaseSymptomsController.text,
@@ -196,7 +210,7 @@ class _InsertDataState extends State<InsertData> {
                           _isLoading = false;
                         });
 
-                        dbRef.push().set(students);
+                        dbRef.push().set(cropData);
                       },
                       color: Color.fromARGB(255, 101, 158, 119),
                       textColor: Colors.white,

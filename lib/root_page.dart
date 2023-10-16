@@ -74,7 +74,7 @@ class _RootPageState extends State<RootPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 30, left: 15, bottom: 15),
+                padding: const EdgeInsets.only(top: 35, left: 15, bottom: 35),
                 child: const Text('Select your crop to heal',
                     style: TextStyle(
                       color: Colors.black,

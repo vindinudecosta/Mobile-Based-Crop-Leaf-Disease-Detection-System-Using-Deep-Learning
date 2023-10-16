@@ -34,7 +34,7 @@ class PlantPhotoView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(25),
                       child: Image.file(
                         file!,
-                        fit: BoxFit.fill,
+                        fit: BoxFit.contain,
                       ),
                     )));
   }
