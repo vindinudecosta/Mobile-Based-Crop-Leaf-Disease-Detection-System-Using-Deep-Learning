@@ -14,7 +14,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as Path;
-import './disease_notification.dart';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 const _labelsFileName = 'assets/labels_leaves.txt';
