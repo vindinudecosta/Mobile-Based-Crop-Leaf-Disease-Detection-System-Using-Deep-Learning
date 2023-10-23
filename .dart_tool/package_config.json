@@ -242,6 +242,18 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "hive",
+      "rootUri": "file:///C:/Users/vindi/AppData/Local/Pub/Cache/hosted/pub.dev/hive-2.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "hive_flutter",
+      "rootUri": "file:///C:/Users/vindi/AppData/Local/Pub/Cache/hosted/pub.dev/hive_flutter-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "http",
       "rootUri": "file:///C:/Users/vindi/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6",
       "packageUri": "lib/",
@@ -530,7 +542,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-10-16T21:11:54.080760Z",
+  "generated": "2023-10-22T13:30:01.538291Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

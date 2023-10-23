@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import '../classifier/classifier.dart';
 import '../styles.dart';
 import 'plant_photo_view.dart';
+import 'package:plantrecogniser/widget/plant_notification.dart';
+import '/app.dart';
 //import '/common/plant_databse.dart';
 //import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -49,7 +51,6 @@ enum _ResultStatus {
 class _PlantRecogniserState extends State<PlantRecogniser> {
   late DatabaseReference dbReference;
 
-  int _bottomNavIndex = 0;
   bool _isLoading = false;
   List<IconData> iconList = [
     Icons.home,
@@ -90,33 +91,33 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
 
     dbReference =
         FirebaseDatabase.instance.ref().child('AnalyzePredictedDiseases');
-    requestPermission();
+    //requestPermission();
     getToken();
-    initNotification();
+    // initNotification();
   }
 
-  void requestPermission() async {
-    final diseasNotificationMsg = FirebaseMessaging.instance;
+  // void requestPermission() async {
+  //   final diseasNotificationMsg = FirebaseMessaging.instance;
 
-    final settings = await diseasNotificationMsg.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
+  //   final settings = await diseasNotificationMsg.requestPermission(
+  //     alert: true,
+  //     announcement: false,
+  //     badge: true,
+  //     carPlay: false,
+  //     criticalAlert: false,
+  //     provisional: false,
+  //     sound: true,
+  //   );
 
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      debugPrint('User granted permission');
-    } else if (settings.authorizationStatus ==
-        AuthorizationStatus.provisional) {
-      debugPrint('User granted provisional permission');
-    } else {
-      debugPrint('User declined or has not accepted permision');
-    }
-  }
+  //   if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+  //     debugPrint('User granted permission');
+  //   } else if (settings.authorizationStatus ==
+  //       AuthorizationStatus.provisional) {
+  //     debugPrint('User granted provisional permission');
+  //   } else {
+  //     debugPrint('User declined or has not accepted permision');
+  //   }
+  // }
 
   void getToken() async {
     await FirebaseMessaging.instance.getToken().then((token) {
@@ -127,15 +128,32 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     });
   }
 
-  Future<void> handleBackgroundMessage(RemoteMessage message) async {
-    debugPrint('Title: ${message.notification?.title}');
-    debugPrint('Body: ${message.notification?.body}');
-    debugPrint('Payload: ${message.data}');
-  }
+  // Future<void> initNotification() async {
+  //   initPushNotification();
+  // }
 
-  Future<void> initNotification() async {
-    FirebaseMessaging.onMessage.listen(handleBackgroundMessage);
-  }
+  // void handleMessage(RemoteMessage? message) {
+  //   if (message == null) return;
+
+  //   navigatorKey.currentState?.pushNamed(
+  //     '/plant_notification',
+  //     arguments: message,
+  //   );
+  // }
+
+  // Future initPushNotification() async {
+  //   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //     handleMessage(message);
+  //   });
+
+  //   FirebaseMessaging.instance.getInitialMessage().then((message) {
+  //     if (message != null) {
+  //       handleMessage(message);
+  //     }
+  //   });
+
+  //   FirebaseMessaging.onMessageOpenedApp.listen((handleMessage));
+  // }
 
   Future uploadFile(String diseasepredicted, File? diseaseImage) async {
     if (diseaseImage != null) {

@@ -3,8 +3,60 @@ import 'common/Navbar_components/navbar_insertdata_btn.dart';
 import 'common/Navbar_components/navbar_btn.dart';
 //import 'package:page_transition/page_transition.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:plantrecogniser/widget/plant_notification.dart';
 import 'widget/plant_recogniser.dart';
 import 'common/appbar.dart';
+import '/app.dart';
+
+void requestPermission() async {
+  final diseasNotificationMsg = FirebaseMessaging.instance;
+
+  final settings = await diseasNotificationMsg.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    debugPrint('User granted permission');
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    debugPrint('User granted provisional permission');
+  } else {
+    debugPrint('User declined or has not accepted permision');
+  }
+}
+
+Future<void> initNotification() async {
+  initPushNotification();
+}
+
+void handleMessage(RemoteMessage? message) {
+  if (message == null) return;
+
+  navigatorKey.currentState?.pushNamed(
+    '/plant_notification',
+    arguments: message,
+  );
+}
+
+Future initPushNotification() async {
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    handleMessage(message);
+  });
+
+  FirebaseMessaging.instance.getInitialMessage().then((message) {
+    if (message != null) {
+      handleMessage(message);
+    }
+  });
+
+  FirebaseMessaging.onMessageOpenedApp.listen((handleMessage));
+}
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
@@ -14,7 +66,7 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   //list of the pages
-  var _bottomNavIndex = 0;
+
   List<String> imagesURL = [
     'assets/images/thumb.jpg',
     'assets/images/paddy_leaf.jpg',
@@ -52,14 +104,14 @@ class _RootPageState extends State<RootPage> {
     ) // tomato
   ];
 
-  List<IconData> iconList = [
-    Icons.home,
-    Icons.favorite,
-    Icons.shopping_cart,
-    Icons.person,
-  ];
-
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initNotification();
+    requestPermission();
+  }
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 

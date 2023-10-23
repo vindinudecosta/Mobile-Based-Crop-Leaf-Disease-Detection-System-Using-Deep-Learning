@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:plantrecogniser/widget/plant_notification.dart';
 
 List<IconData> iconList = [
   Icons.home,
   Icons.favorite,
-  Icons.shopping_cart,
+  Icons.notifications_active,
   Icons.person,
 ];
 
@@ -22,6 +23,13 @@ class NavBarMainBtn extends StatelessWidget {
         activeIndex: bottomNavIndex,
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.softEdge,
-        onTap: (index) {});
+        onTap: (index) {
+          Navigator.push<PlantNotification>(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PlantNotification(),
+            ),
+          );
+        });
   }
 }

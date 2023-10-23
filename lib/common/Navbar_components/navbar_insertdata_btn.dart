@@ -4,13 +4,6 @@ import '../../insert_leafdata.dart';
 
 import 'package:page_transition/page_transition.dart';
 
-List<IconData> iconList = [
-  Icons.home,
-  Icons.favorite,
-  Icons.shopping_cart,
-  Icons.person,
-];
-
 List<Widget> pages = const [InsertData()];
 var bottomNavIndex = 0;
 
