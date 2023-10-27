@@ -65,21 +65,13 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-  //list of the pages
-
-  List<String> imagesURL = [
-    'assets/images/thumb.jpg',
-    'assets/images/paddy_leaf.jpg',
-    'assets/images/thumb.jpg',
-    'assets/images/paddy_leaf.jpg',
-  ];
   List<Widget> models = [
     const PlantRecogniser(
       labelsFileNameMain: 'assets/labels_potato.txt',
       modelFileNameMain: 'model_unquant_potato.tflite',
       plantName: 'Potato',
       plantImagesURL: 'assets/images/thumb.jpg',
-      plantID: 1,
+      plantID: 2,
     ), // potato
     const PlantRecogniser(
       labelsFileNameMain: 'assets/labels_rice.txt',
@@ -89,18 +81,18 @@ class _RootPageState extends State<RootPage> {
       plantID: 0,
     ), // paddy
     const PlantRecogniser(
-      labelsFileNameMain: 'assets/labels_tomato.txt',
-      modelFileNameMain: 'tflite_quant_model_tomato_v1.tflite',
+      labelsFileNameMain: 'assets/labels_tealeaves.txt',
+      modelFileNameMain: 'trained_model_tealeaves_v1.tflite',
       plantName: 'Tea',
       plantImagesURL: 'assets/images/tea_leaves.jpg',
-      plantID: 0,
+      plantID: 1,
     ), // tea
     const PlantRecogniser(
       labelsFileNameMain: 'assets/labels_tomato.txt',
       modelFileNameMain: 'tflite_quant_model_tomato_v1.tflite',
       plantName: 'Tomato',
       plantImagesURL: 'assets/images/tomato_leaf.png',
-      plantID: 1,
+      plantID: 3,
     ) // tomato
   ];
 
@@ -192,6 +184,40 @@ class _RootPageState extends State<RootPage> {
                       ),
                     );
                   },
+                ),
+              ),
+              const SizedBox(
+                height: 55,
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Card(
+                    color: const Color.fromARGB(255, 166, 191, 170),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const <Widget>[
+                          Text(
+                            'Add new crop diseases',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'If you are a expert in crop disease identification'
+                            ' click the upload icon below to add new diseases'
+                            ' and help us train new AI models for prediction.',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],

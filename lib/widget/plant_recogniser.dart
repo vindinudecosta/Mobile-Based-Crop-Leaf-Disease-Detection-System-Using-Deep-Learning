@@ -231,18 +231,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
       debugPrint(
           'disease precautions array is not  empty = $diseasePrecautions');
     }
-    // Now, diseaseNames and diseaseSymptoms arrays are populated with data
-    // You can access these arrays as needed
   }
-
-  // Future _getData() async {
-  //   PlantDatabaseManager(widget.plantID).getData();
-  // }
-
-  // Future _getplantId() {
-  //   final plantids = PlantDatabaseManager(widget.plantID).getPlantID();
-  //   return plantids;
-  // }
 
   Future<void> _loadClassifier() async {
     debugPrint(
@@ -315,7 +304,6 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                   ),
                 ],
               )),
-
           Positioned(
               top: 100,
               left: 20,
@@ -325,7 +313,6 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                   height: size.height * .8,
                   padding: const EdgeInsets.all(0),
                   child: _buildPhotolView())),
-
           Positioned(
               bottom: 0,
               left: 0,
@@ -344,39 +331,28 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                   ),
                   child: SingleChildScrollView(
                       child: Container(
-                    padding: const EdgeInsets.only(top: 0, left: 30, right: 30),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                _buildPickPhotoButtonfromcamera(
-                                  title: 'Take a photo',
-                                  source: ImageSource.camera,
-                                ),
-                                const SizedBox(width: 30),
-                                _buildPickPhotoButtonfromgallery(
-                                  title: 'Pick from gallery',
-                                  source: ImageSource.gallery,
-                                )
-                              ]),
-                          _buildPhotolView(),
-                          const SizedBox(height: 20),
-                          _buildResultView(),
-                        ]),
+                    padding: const EdgeInsets.only(
+                        top: 0, left: 10, right: 10, bottom: 25),
+                    child: Center(
+                        child: Column(children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            _buildPickPhotoButtonfromcamera(
+                              title: 'Take a photo',
+                              source: ImageSource.camera,
+                            ),
+                            const SizedBox(width: 30),
+                            _buildPickPhotoButtonfromgallery(
+                              title: 'Pick from gallery',
+                              source: ImageSource.gallery,
+                            )
+                          ]),
+                      _buildPhotolView(),
+                      const SizedBox(height: 20),
+                      _buildResultView(),
+                    ])),
                   ))))
-
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 30),
-          //   child: _buildTitle(),
-          // ),
-
-          // _buildPhotolView(),
-          // const SizedBox(height: 20),
-
-          // _buildResultView(),
-          // const SizedBox(height: 80),
         ],
       ),
     );
@@ -477,13 +453,6 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
 
       await getData();
 
-      // Ensure that plantIDs is not empty and widget.plantID is within valid
-      // if (plantIDs.isNotEmpty && widget.plantID < plantIDs.length) {
-      //   diseaseSymptomsmain = plantIDs[widget.plantID];
-      // } else {
-      //   diseaseSymptomsmain = 'No data found';
-      // }
-
       if (diseaseNames.isNotEmpty) {
         debugPrint('diseeaseName array is not empty!!!!');
 
@@ -541,7 +510,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
       accuracyLabel = 'Accuracy: ${(_accuracy * 100).toStringAsFixed(2)}%';
     }
 
-    return Column(
+    return Center(
+        child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: 20),
@@ -564,6 +534,32 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                     Text(_diseasePrecautionsmain,
                         style: kResultRatingTextStyle),
                     const SizedBox(height: 30),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(0),
+                        child: Card(
+                          color: const Color.fromARGB(255, 166, 191, 170),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const <Widget>[
+                                Text(
+                                  'Before taking any action, read the symptoms'
+                                  '  to make sure this diagnosis matches your'
+                                  ' problem.otherwise, click the upload button'
+                                  '  to upload the to us and our experts will  '
+                                  ' analyse and sent the results',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
                     MaterialButton(
                       onPressed: () async {
                         setState(() {
@@ -575,12 +571,6 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                           'device token': mtoken,
                         };
 
-                        // await uploadFile()
-                        //     .whenComplete(() => Navigator.pop(context));
-                        // setState(() {
-                        //   _isLoading = false;
-                        // });
-
                         dbReference.push().set(cropAnalyzeData);
 
                         await uploadFile(_plantLabel, _selectedImageFile)
@@ -589,7 +579,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                           _isLoading = false;
                         });
                       },
-                      color: Color.fromARGB(255, 101, 158, 119),
+                      color: const Color.fromARGB(255, 101, 158, 119),
                       textColor: Colors.white,
                       minWidth: 300,
                       height: 40,
@@ -598,6 +588,6 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                   ],
                 )
       ],
-    );
+    ));
   }
 }

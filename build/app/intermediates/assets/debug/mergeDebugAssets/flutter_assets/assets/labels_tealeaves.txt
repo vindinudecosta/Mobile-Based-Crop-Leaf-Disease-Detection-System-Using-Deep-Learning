@@ -1,0 +1,11 @@
+0 Anthracnose
+1 Algal leaf
+2 Bird eye spot
+3 Brown blight
+4 Gray light
+5 Healthy
+6 Red leaf spot
+7 White spot
+
+
+

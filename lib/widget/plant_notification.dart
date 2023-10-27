@@ -102,33 +102,39 @@ class _PlantNotificationState extends State<PlantNotification> {
               refreshNotificationData();
             });
           },
-          child: ListView.builder(
-            itemCount: notificationTitleList.length,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
-              return Card(
-                color: Colors.green.shade100,
-                margin: const EdgeInsets.all(20),
-                elevation: 3,
-                child: ListTile(
-                  title: Text(notificationTitleList[index]),
-                  subtitle: Text(notificationBodyList[index]),
-                  trailing: Row(mainAxisSize: MainAxisSize.min, children: [
-                    IconButton(
-                        onPressed: () {
-                          deleteItem(index);
-                          Navigator.push<Widget>(
-                              context,
-                              MaterialPageRoute(
+          child: notificationTitleList.isEmpty
+              ? const Text(' No notifications yet.')
+              : ListView.builder(
+                  itemCount: notificationTitleList.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      color: Colors.green.shade100,
+                      margin: const EdgeInsets.all(20),
+                      elevation: 3,
+                      child: ListTile(
+                        title: Text(notificationTitleList[index]),
+                        subtitle: Text(notificationBodyList[index]),
+                        trailing:
+                            Row(mainAxisSize: MainAxisSize.min, children: [
+                          IconButton(
+                            onPressed: () {
+                              deleteItem(index);
+                              Navigator.push<Widget>(
+                                context,
+                                MaterialPageRoute(
                                   builder: (context) =>
-                                      const PlantNotification()));
-                        },
-                        icon: const Icon(Icons.delete))
-                  ]),
+                                      const PlantNotification(),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.delete),
+                          ),
+                        ]),
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
         ),
       ),
     );
